@@ -269,6 +269,35 @@ layer.conversations.delete(cid, function(err, res) {
 });
 ```
 
+---------------------------------------
+
+### conversations.initiateRichContent(cid, contentType, contentOrigin, contentLength, [callback])
+
+[Initiate](https://developer.layer.com/docs/platform/messages#initiating-a-rich-content-upload) a rich content upload by providing conversation ID, content type, origin and length.
+
+##### Arguments
+
+- `cid` - Conversation ID
+- `contentType` - Mime type for the content to be uploaded (eg: "image/png")
+- `contentOrigin` - Value of the "Origin" header of the future upload request, due to CORS requirements (eg: "http://mydomain.com")
+- `contentLength` - Size of the content to be uploaded (eg: 10001)
+- `callback(err, res)` - *Optional* Callback function returns an error and response objects
+
+##### Examples
+
+```javascript
+var contentType   = 'image/png',
+    contentOrigin = 'http://mydomain.com',
+    contentLength = 10001;
+
+layer.conversations.initiateRichContent(cid, contentType, contentOrigin, contentLength, function(err, res) {
+  if (err) return console.error(err);
+
+  // content data (id and upload url)
+  var content = res.body;
+});
+```
+
 ## Messages
 
 Messages can be made up of one or many individual pieces of content.

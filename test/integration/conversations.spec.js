@@ -193,4 +193,24 @@ describe('Conversation operations', function() {
       });
     });
   });
+
+  decribe('Initiate a rich content upload', function() {
+    var contentType = 'image/png';
+    var contentOrigin = 'http://mydomain.com',
+    var contentLength = 10001;
+
+    it('should return a 201 and content', function(done) {
+      layerAPI.conversations.initiateRichContent(conversationId, contentType, contentOrigin, contentLength, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+        should(res.status).be.eql(201);
+        res.body.should.have.ownProperty('id');
+        res.body.should.have.ownProperty('size');
+        res.body.should.have.ownProperty('upload_url');
+        res.body.size.should.be.exactly(contentLength);
+
+        done(err);
+      });
+    });
+  });
 });

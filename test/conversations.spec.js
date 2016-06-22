@@ -387,4 +387,28 @@ describe('Conversation operations', function() {
       });
     });
   });
+
+  describe('Initiate rich content upload', function() {
+    nock('https://api.layer.com', {
+      reqheaders: {
+        'Upload-Content-Type': fixtures.conversations.contentType,
+        'Upload-Origin': fixtures.conversations.contentOrigin,
+        'Upload-Content-Length': fixtures.conversations.contentLength.toString()
+      }
+    })
+    .post('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid + '/content')
+    .reply(201, fixtures.conversations.content);
+
+    it('should return a 201 and content', function(done) {
+      layerAPI.conversations.initiateRichContent(fixtures.conversations.uuid, fixtures.conversations.contentType, fixtures.conversations.contentOrigin, fixtures.conversations.contentLength, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(201);
+        res.body.should.have.properties(fixtures.conversations.content);
+
+        done(err);
+      });
+    });
+  });
 });

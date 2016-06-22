@@ -34,6 +34,17 @@
         "code": 102,
         "message": "The referenced conversation cannot be found."
       }
+    },
+    "contentType": "image/png",
+    "contentOrigin": "http://mydomain.com",
+    "contentLength": 10001,
+    "content": {
+      "id": "layer:///content/3d0736d9-1a50-4e9a-a9b3-2400caa9e161",
+      "size": 10001,
+      "upload_url": "https://www.googleapis.com/upload/storage/v1/b/myBucket/o?uploadType=resumable&upload_id=xa298sd_sdlkj2",
+      "download_url": null,
+      "refresh_url": null,
+      "expiration": null
     }
   },
   "messages": {
